@@ -1,6 +1,7 @@
 #include "CpManager.h"
 
 #include <algorithm>
+#include <cstring>
 #include <sstream>
 
 // ========================= CmdDataStore =========================
@@ -161,7 +162,7 @@ void CpManager::resetContext()
     m_curId_ = 0;
 }
 
-int CpManager::createCmdInfo(const std::string &cmdName, int sourceDataIdx, std::vector<CpCmd *> cmdVec)
+int CpManager::createCmdInfo(const std::string &cmdName, int sourceDataIdx, std::vector<CpCmd *> &cmdVec)
 {
     ICpCmdProtocol *protocol = getProtocol(cmdName);
     if (!protocol)

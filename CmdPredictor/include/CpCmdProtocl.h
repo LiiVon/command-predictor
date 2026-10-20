@@ -23,11 +23,11 @@ public:
     virtual std::string getCmdName() const = 0;
 
     // app端的 命令  --->   CpCmd 预测机制端的命令
-    virtual int createInfo(int sourceDataIdx,std::vector<CpCmd *> cmdVec) = 0;
+    virtual int createInfo(int sourceDataIdx, std::vector<CpCmd *> &cmdVec) = 0;
 
     // CpCmd 预测机制端的命令  --->   app端的 命令
     virtual CpApplyResult applyInfo(CpCmd *cmd,CpCmdGroup *group,int &execDataIdx,std::string& appliedContextId) = 0;
 
     // 目前翻译的命令  涉及到的 上下文书籍
-    virtual std::string getContextData(int sourceDataIdx) const = 0;
+    virtual std::string getContextData(int sourceDataIdx)  = 0;
 };

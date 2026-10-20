@@ -56,7 +56,7 @@ public:
     void resetContext();                                                                  // 重置上下文仓库
 
     // 对外快捷入口
-    int createCmdInfo(const std::string &cmdName, int sourceDataIdx, std::vector<CpCmd *> cmdVec); // app端的 命令  --->   CpCmd 预测机制端的命令
+    int createCmdInfo(const std::string &cmdName, int sourceDataIdx, std::vector<CpCmd *> &cmdVec); // app端的 命令  --->   CpCmd 预测机制端的命令
     CpApplyResult applyCmdInfo(CpCmd *cmd, CpCmdGroup *group, int &execDataIdx, std::string &appliedContextId);  // CpCmd 预测机制端的命令  --->   app端的 命令 
     std::string getContextData(const std::string &cmdName, int sourceDataIdx) const; // 根据命令名和源数据索引获取上下文数据
 

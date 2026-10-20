@@ -73,6 +73,11 @@ bool NgramPredictor::isLoaded() const
     return !m_history_.empty();
 }
 
+std::string NgramPredictor::getEngineName() const
+{
+    return "N-gram";
+}
+
 void NgramPredictor::dumpStats() const
 {
     std::cout << "Transition Counts:\n";
