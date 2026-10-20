@@ -156,6 +156,10 @@ public:
         }
         return nullptr;
     }
+
+    std::string getName() const { return this->m_name_; }
+    std::string getId() const { return this->m_id_; }
+    std::string getVersion() const { return this->m_version_; }
 private:
     std::string m_name_;
     std::string m_id_;
@@ -216,7 +220,7 @@ public:
         return m_cmdGroups_[idx];
     }
     const std::vector<CpCmdGroup *>& getGroups() const { return m_cmdGroups_; }
-    int cmdGroupCount() const { return static_cast<int>(m_cmdGroups_.size()); }
+    int getCmdGroupCount() const { return static_cast<int>(m_cmdGroups_.size()); }
 private:
     std::vector<CpCmdGroup *> m_cmdGroups_;
 };

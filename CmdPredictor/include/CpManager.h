@@ -17,7 +17,7 @@ public:
     static void setParam(int idx, const std::string &key, double value);
     static bool getParam(int idx, const std::string &key, double &value);
     static std::string getName(int idx);
-    static CmdDataStore *getInstance();
+    static CmdDataStore &getInstance();
 
 private:
     struct CommandRec
@@ -34,6 +34,8 @@ public:
     ~CpManager();
     CpManager(const CpManager &) = delete;
     CpManager &operator=(const CpManager &) = delete;
+
+    static CpManager &getInstance();
 
     // 注册协议
     int registerProtocol(ICpCmdProtocol *protocol);
@@ -55,12 +57,12 @@ public:
 
     // 对外快捷入口
     int createCmdInfo(const std::string &cmdName, int sourceDataIdx, std::vector<CpCmd *> cmdVec); // app端的 命令  --->   CpCmd 预测机制端的命令
-    CpApplyResult applyCmdInfo(const std::string &cmdName, CpCmd *cmd, CpCmdGroup *group, int &execDataIdx, std::string &appliedContextId);  // CpCmd 预测机制端的命令  --->   app端的 命令 
+    CpApplyResult applyCmdInfo(CpCmd *cmd, CpCmdGroup *group, int &execDataIdx, std::string &appliedContextId);  // CpCmd 预测机制端的命令  --->   app端的 命令 
     std::string getContextData(const std::string &cmdName, int sourceDataIdx) const; // 根据命令名和源数据索引获取上下文数据
 
     // 命令名 编解码 (命令名__类型)
     static std::string encodeCmdNameAndType(const std::string &cmdName, int type); 
-    static std::string encodeCmdName(const std::string &cmdName);
+    static std::string decodeCmdName(const std::string &cmdName);
     static int decodeCmdtype(const std::string &encodedCmdName);
 
 private:
@@ -69,5 +71,5 @@ private:
     std::map<std::string, ICpCmdProtocol *> m_protocolMap_; // 协议注册表  命令名 -- > 协议
     CpCmdInfo *m_predictInfo_ = nullptr;                    // 预测结果仓库
     int m_curId_ = 0;                                       // 当前上下文id
-    std::map<std::string, std::string> m_contextMap_;       // 上下文仓库
+    std::map<std::string, std::string> m_contextMap_;       // 上下文仓库  id -- > 数据
 };
