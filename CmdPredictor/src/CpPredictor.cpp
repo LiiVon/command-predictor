@@ -68,6 +68,11 @@ std::vector<std::string> NgramPredictor::predictSequence()
     return seq;
 }
 
+bool NgramPredictor::isLoaded() const
+{
+    return !m_history_.empty();
+}
+
 void NgramPredictor::dumpStats() const
 {
     std::cout << "Transition Counts:\n";
